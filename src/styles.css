@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Custom dialog styles */
+.custom-dialog-container .mat-mdc-dialog-surface {
+  background-color: #614caf !important;
+  border-radius: 12px !important;
+  color: white !important;
+}
+
+.custom-dialog-container .mat-mdc-dialog-title,
+.custom-dialog-container .mat-mdc-dialog-content {
+  color: white !important;
+}
+
+.custom-dialog-container .mat-mdc-button {
+  color: white !important;
+}
+
+.custom-dialog-container .mat-mdc-dialog-container {
+  padding: 24px;
+}
+
+.custom-dialog-container .mat-icon {
+  color: white !important;
+}
+
+/* Add a subtle shadow to the dialog */
+.custom-dialog-container {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25) !important;
+}

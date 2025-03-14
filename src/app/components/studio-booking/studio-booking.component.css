@@ -1,0 +1,58 @@
+.booking-dialog {
+  padding: 0;
+}
+
+.form-row {
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.error-message {
+  color: #f44336;
+  margin-top: 16px;
+  font-size: 14px;
+  padding: 8px 12px;
+  background-color: rgba(244, 67, 54, 0.1);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.error-message::before {
+  content: "⚠️";
+  margin-right: 8px;
+}
+
+/* Style for mat-error inside form fields */
+::ng-deep .mat-error {
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+mat-dialog-content {
+  padding-top: 16px;
+  min-height: 300px;
+}
+
+mat-dialog-actions {
+  padding: 16px 0;
+}
+
+.action-container{
+  margin-right: 30px;
+}
+
+/* Add a highlight effect for invalid inputs */
+::ng-deep .ng-invalid.ng-touched {
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}

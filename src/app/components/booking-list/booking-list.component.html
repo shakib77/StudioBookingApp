@@ -1,0 +1,60 @@
+<div class="booking-list-container">
+  <h2>Bookings</h2>
+
+  <div class="table-container">
+    <table mat-table [dataSource]="bookings">
+      <!-- Studio Name Column -->
+      <ng-container matColumnDef="studioName">
+        <th mat-header-cell *matHeaderCellDef>Studio</th>
+        <td mat-cell *matCellDef="let booking">{{booking.studioName}}</td>
+      </ng-container>
+
+      <!-- Location Column -->
+      <ng-container matColumnDef="location">
+        <th mat-header-cell *matHeaderCellDef>Location</th>
+        <td mat-cell *matCellDef="let booking">{{booking.location}}</td>
+      </ng-container>
+
+      <!-- Date Column -->
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>Date</th>
+        <td mat-cell *matCellDef="let booking">{{formatDate(booking.date)}}</td>
+      </ng-container>
+
+      <!-- Time Slot Column -->
+      <ng-container matColumnDef="timeSlot">
+        <th mat-header-cell *matHeaderCellDef>Time</th>
+        <td mat-cell *matCellDef="let booking">{{booking.timeSlot}}</td>
+      </ng-container>
+
+      <!-- User Name Column -->
+      <ng-container matColumnDef="userName">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let booking">{{booking.userName}}</td>
+      </ng-container>
+
+      <!-- User Email Column -->
+      <ng-container matColumnDef="userEmail">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let booking">{{booking.userEmail}}</td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let booking">
+          <button mat-icon-button color="warn" (click)="onDeleteBooking(booking.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <div *ngIf="bookings.length === 0" class="no-bookings">
+    <p>You don't have any bookings yet.</p>
+  </div>
+</div>

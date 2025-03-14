@@ -1,0 +1,50 @@
+.booking-list-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.table-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-mdc-table {
+  background-color: #6902df;
+  color: #ece8e8;
+}
+
+.mat-mdc-header-cell {
+  background-color: #450a88;
+  font-weight: bold;
+  color: #ece8e8;
+}
+
+.mat-mdc-row:hover {
+  background-color: #390a6e;
+  color: #ece8e8;
+}
+
+.no-bookings {
+  text-align: center;
+  padding: 40px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.no-bookings p {
+  color: #666;
+  font-size: 16px;
+}

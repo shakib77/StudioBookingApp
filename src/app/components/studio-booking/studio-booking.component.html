@@ -1,0 +1,77 @@
+<div class="booking-dialog">
+  <h2 mat-dialog-title>Book {{data.studio.Name}}</h2>
+
+  <form (ngSubmit)="onSubmit()" #bookingForm="ngForm">
+    <mat-dialog-content>
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Your Name</mat-label>
+          <input matInput [(ngModel)]="formData.userName" name="userName" required>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            [(ngModel)]="formData.userEmail"
+            name="userEmail"
+            type="email"
+            required
+            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+            #emailInput="ngModel">
+          <mat-error *ngIf="emailInput.errors?.['required']">Email is required</mat-error>
+          <mat-error *ngIf="emailInput.errors?.['pattern']">Please enter a valid email address</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Date</mat-label>
+          <input matInput [matDatepicker]="picker" [(ngModel)]="formData.date" name="date"
+                 [min]="minDate" [max]="maxDate" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Time Slot</mat-label>
+          <mat-select [(ngModel)]="formData.timeSlot" name="timeSlot" required>
+            <mat-option *ngFor="let slot of timeSlots" [value]="slot">
+              {{slot}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Duration (hours)</mat-label>
+          <input matInput type="number" [(ngModel)]="formData.duration" name="duration"
+                 min="1" max="8" required>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Notes</mat-label>
+          <textarea matInput [(ngModel)]="formData.notes" name="notes" rows="3"></textarea>
+        </mat-form-field>
+      </div>
+
+      <div *ngIf="errorMessage" class="error-message">
+        {{errorMessage}}
+      </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end"  class="action-container">
+      <button mat-button (click)="onCancel()">Cancel</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!bookingForm.valid">
+        Book Now
+      </button>
+    </mat-dialog-actions>
+  </form>
+</div>

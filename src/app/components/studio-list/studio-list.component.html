@@ -1,0 +1,117 @@
+<div class="studio-list-container">
+  <div class="search-section">
+    <div class="search-box">
+      <mat-form-field appearance="outline" class="search-form-field">
+        <mat-label>Search by location</mat-label>
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="searchTerm"
+          (input)="onSearchInput()"
+          (keyup.enter)="onSearch(searchTerm)"
+          [matAutocomplete]="auto"
+          placeholder="Type to search..."
+          class="search-input"
+        />
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option
+            *ngFor="let location of filteredLocations | async"
+            [value]="location"
+            (click)="onLocationSelected(location)"
+          >
+            {{ location }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <div class="search-buttons">
+        <button (click)="onSearch(searchTerm)" class="search-button">
+          Search
+        </button>
+      </div>
+    </div>
+    <div class="radius-search" [class.active-search]="isRadiusSearchActive">
+      <div class="radius-selector">
+        <select
+          [(ngModel)]="selectedRadius"
+          class="radius-dropdown"
+          (change)="onRadiusChange(selectedRadius)"
+        >
+          <option *ngFor="let radius of radiusOptions" [value]="radius">
+            {{ radius }}km
+          </option>
+        </select>
+      </div>
+      <button (click)="getCurrentLocation()" class="radius-button">
+        {{ isRadiusSearchActive ? 'Update radius search' : 'Search within radius' }}
+      </button>
+    </div>
+    <button (click)="resetSearch()" class="reset-button">Reset All</button>
+  </div>
+
+  <!-- Loading indicator -->
+  <div *ngIf="isLoading" class="loading-container">
+    <div class="loader"></div>
+    <p>Loading studios...</p>
+  </div>
+
+  <!-- No results message -->
+  <div *ngIf="!isLoading && displayedStudios.length === 0" class="no-results">
+    <p>No studios found. Please try a different search.</p>
+  </div>
+
+  <!-- Studios grid -->
+  <div *ngIf="!isLoading && displayedStudios.length > 0" class="studios-grid">
+    <div *ngFor="let studio of displayedStudios" class="studio-card">
+      <!-- <div class="studio-image">
+        <img [src]="studio.Images[0]" [alt]="studio.Name" />
+      </div> -->
+      <div class="studio-info">
+        <h3>{{ studio.Name }}</h3>
+        <p class="studio-type">{{ studio.Type }}</p>
+        <p class="location">
+          <i class="fas fa-map-marker-alt"></i>
+          {{ studio.Location.Area }}, {{ studio.Location.City }}
+        </p>
+        <div class="amenities">
+          <span
+            *ngFor="let amenity of studio.Amenities.slice(0, 3)"
+            class="amenity-tag"
+          >
+            {{ amenity }}
+          </span>
+        </div>
+        <div class="price-rating">
+          <span class="price"
+            >{{ studio.PricePerHour }} {{ studio.Currency }}/hour</span
+          >
+          <div class="rating">
+            <i
+              *ngFor="let star of getStars(studio.Rating)"
+              class="fas fa-star"
+            ></i>
+          </div>
+        </div>
+        <button class="book-button" (click)="openBookingModal(studio)">
+          Book Now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div
+    *ngIf="!isLoading && displayedStudios.length > 0"
+    class="paginator-container"
+  >
+    <mat-paginator
+      [length]="totalStudios"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizeOptions"
+      [pageIndex]="pageIndex"
+      (page)="onPageChange($event)"
+      aria-label="Select page"
+      showFirstLastButtons
+      class="custom-paginator"
+    >
+    </mat-paginator>
+  </div>
+</div>
