@@ -1,5 +1,8 @@
 # StudioBookingApp
 
+##Live Url
+- **Site**: `https://beamish-medovik-a5e47f.netlify.app/`
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.3.
 
 ## Development server

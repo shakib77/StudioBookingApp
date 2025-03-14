@@ -553,3 +553,10 @@ button:hover::after {
 .mdc-text-field__input {
   color: #000 !important;
 }
+
+/* Simplified hover effects for buttons */
+.search-button:hover,
+.reset-button:hover,
+.radius-button:hover {
+  transform: translateY(-2px);
+}
